@@ -1,0 +1,73 @@
+import React, { useState } from "react";
+import "./App.css";
+import {
+  MapContainer,
+  TileLayer,
+  Popup,
+  Marker,
+  FeatureGroup,
+} from "react-leaflet";
+// import * as parkData from "./data/skateboard-parks.json";
+// import useSWR from 'swr';
+import { EditControl } from "react-leaflet-draw";
+import "leaflet-draw/dist/leaflet.draw.css";
+
+function App() {
+  // const skateparks = parkData.default.features;
+
+  // const [activePark, setActivePark] = useState(null);
+
+  const _created = e => console.log(e);
+  return (
+    <MapContainer
+      center={[45.421532, -75.697189]}
+      zoom={13}
+      style={{ height: "100vh", width: "100%" }}
+    >
+      <FeatureGroup>
+        <EditControl
+          position="topright"
+          onCreated={_created}
+        />
+      </FeatureGroup>
+
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+
+      {/* Uses Data from Json */}
+
+      {/* {skateparks.map((park) => (
+        <Marker
+          key={park.properties.PARK_ID}
+          position={[
+            park.geometry.coordinates[1],
+            park.geometry.coordinates[0],
+          ]}
+          eventHandlers={{
+            click: () => {
+              // event.stopPropagation();
+              setActivePark(park); 
+              console.log("Marker clicked:", park.properties.PARK_ID);
+
+            },
+          }}
+        />
+      ))}
+      {activePark && (
+        <Popup
+          position={[
+            activePark.geometry.coordinates[1],
+            activePark.geometry.coordinates[0],
+          ]}
+        >
+          <h2>{activePark.properties.Name}</h2>
+          <p>{activePark.properties.DESCRIPTIO}</p>
+        </Popup>
+      )} */}
+    </MapContainer>
+  );
+}
+
+export default App;
